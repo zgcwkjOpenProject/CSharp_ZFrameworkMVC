@@ -1,0 +1,2 @@
+﻿Exampler,功能表,示例表&ExamplerID,int,示例ID|ExamplerName,nvarchar,示例名称
+Test,功能表,测试表&TestID,int,测试ID|TestName,nvarchar,测试名称|TestBool,bool,测试布尔
