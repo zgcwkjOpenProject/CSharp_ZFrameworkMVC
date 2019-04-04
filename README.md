@@ -22,6 +22,12 @@
 
 3、会观察别人写的代码
 
+登陆说明：
+
+1、登陆地址 /Admin
+
+2、登陆账号和密码：admin
+
 ---
 
 项目由**代码生成器**生成，详细请查看：[http://blog.zgcwkj.top/search/CodeGenerator](http://blog.zgcwkj.top/search/CodeGenerator)
