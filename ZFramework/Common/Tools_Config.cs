@@ -93,7 +93,7 @@ namespace ZFramework.Common
         /// </summary>
         /// <param name="Name">名称</param>
         /// <returns></returns>
-        public bool Dalete(string Name)
+        public bool Delete(string Name)
         {
             try
             {
