@@ -1,10 +1,4 @@
-﻿/*
-代码生成器 V 1.8.1.1 zgcwkj
-生成时间：2019年03月02日
-在使用过程中应当保留原作者相关版权
-*/
-
---表开始
+﻿--表开始
 GO
 CREATE TABLE [dbo].[SMenu]([MenuID] [int] IDENTITY(1,1) NOT NULL,
 [ParentID] [int] NULL CONSTRAINT [DF_SMenu_ParentID]  DEFAULT ((0)),
