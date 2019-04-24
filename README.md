@@ -28,6 +28,18 @@
 
 2、登陆账号和密码：admin
 
+图片预览：
+
+![001](/Picture_Preview/001.png)
+
+![002](/Picture_Preview/002.png)
+
+![003](/Picture_Preview/003.png)
+
+![004](/Picture_Preview/004.png)
+
+![005](/Picture_Preview/005.png)
+
 ---
 
 项目由**代码生成器**生成，详细请查看：[http://blog.zgcwkj.top/search/CodeGenerator](http://blog.zgcwkj.top/search/CodeGenerator)
