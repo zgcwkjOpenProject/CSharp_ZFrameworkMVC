@@ -22,5 +22,16 @@
     <script src="~/Resource/Content/js/jquery.min.js"></script>
     <script src="~/Resource/Content/js/bootstrap.min.js"></script>
     <script src="~/Resource/Content/js/content.min.js"></script>
+    <script>
+        var error = "@ViewData["html"]";
+        $(function () {
+            $.post("/Log/InsertLogData", {
+                FilePath: error,
+                ControllerName: error,
+            }, function (data) {
+                console.log(data);
+            });
+        });
+    </script>
 </body>
 </html>

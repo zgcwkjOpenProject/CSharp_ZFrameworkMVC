@@ -26,8 +26,8 @@
                     </div>
                 </div>
             </div>
-            <div class="layui-form" id="table-list">
-                <table class="layui-table" id="TableData"></table>
+            <div class="layui-form" id="TablePrint">
+                <table class="layui-table" lay-filter="TableData" id="TableData"></table>
             </div>
         </div>
     </div>
@@ -108,9 +108,22 @@
                     { field: 'UserIP', title: '用户IP', sort: true },
                     { field: 'RequestPath', title: '请求地址', sort: true },
                     { field: 'Controller', title: '控制器' },
+                    //{ field: 'Controller', title: '控制器', edit: 'text' },
                     { field: 'CreateTime', title: '创建时间', sort: true },
                 ]]
             });
+            ////监听单元格编辑
+            //table.on('edit(TableData)', function (obj) {
+            //    var data = obj.data;//所在行的所有相关数据
+            //    var field = obj.field;//当前编辑的字段名
+            //    var value = obj.value;//得到修改后的值
+            //    console.log(data, field, value);
+            //});
+            ////监听行单击事件
+            //table.on('row(TableData)', function (obj) {
+            //    var data = obj.data;//单击行的所有相关数据
+            //    console.log(data);
+            //});
         });
         //查询按钮
         function SearchData() {
@@ -125,7 +138,9 @@
         //删除所有日志
         function DeleteDate() {
             layer.confirm('确定要删除吗？', {
-                btn: ['确定', '取消'] //按钮
+                shade: 0.4,
+                resize: false,
+                btn: ['确定', '取消'],
             }, function () {
                 $.post("/Log/DeleteLogDate", function (data) {
                     if (data.Status == true) {

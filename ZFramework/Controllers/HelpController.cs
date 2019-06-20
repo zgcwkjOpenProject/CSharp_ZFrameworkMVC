@@ -1,9 +1,4 @@
-﻿/*
-代码生成器 V 1.9.0.3 zgcwkj
-生成时间：2019年03月02日
-在使用过程中应当保留原作者相关版权
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -27,6 +22,10 @@ namespace ZFramework.Controllers
 
         /// <summary>
         /// 404页面
+        /// 在web.config的system.web节点上添加如下内容
+        /// <customErrors mode="On" defaultRedirect="Help/Error">
+        ///   <error statusCode="404" redirect="Help/Error" />
+        /// </customErrors>
         /// </summary>
         /// <param name="aspxerrorpath">自动传递报错的参数</param>
         /// <returns></returns>

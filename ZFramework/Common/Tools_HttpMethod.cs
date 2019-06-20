@@ -1,9 +1,4 @@
-﻿/*
-代码生成器 V 1.9.0.3 zgcwkj
-生成时间：2019年03月02日
-在使用过程中应当保留原作者相关版权
-*/
-using System;
+﻿using System;
 using System.IO;
 using System.Net;
 using System.Net.Security;
@@ -15,7 +10,7 @@ namespace ZFramework.Common
     /// <summary>
     /// 网络请求工具
     /// </summary>
-    public static class Tools_TcpNetwork
+    public static class Tools_HttpMethod
     {
         #region 网络请求
 

@@ -1,9 +1,4 @@
-﻿/*
-代码生成器 V 1.9.0.3 zgcwkj
-生成时间：2019年03月02日
-在使用过程中应当保留原作者相关版权
-*/
-using System;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -17,8 +12,8 @@ namespace ZFramework.Models
     /// </summary>
     public class Authorization : FilterAttribute, IAuthorizationFilter
     {
-        private int userID = 0;
-        private int roleID = 0;
+        private int userID = 0;//用户ID
+        private int roleID = 0;//角色ID
 
         /// <summary>
         /// 检验授权方法
@@ -28,7 +23,7 @@ namespace ZFramework.Models
         {
             string toClass = filterContext.Controller.ToString();//获取访问的控制器类名
             string toPageName = filterContext.ActionDescriptor.ActionName;//获取访问的页面名称
-            string toControllerName = toClass.Split('.')[toClass.Split('.').Count() - 1].Replace("Controller", "");//获取访问的控制器名
+            string toControllerName = toClass.Split('.')[toClass.Split('.').Count() - 1];//获取访问的控制器名
             string toUserIP = filterContext.HttpContext.Request.UserHostAddress;//获取访问者的IP地址
             string toFilePath = filterContext.HttpContext.Request.FilePath;//获取访问的地址
             string toFilePathS = toFilePath.Substring(0, toFilePath.LastIndexOf("/"));//获取访问的地址并减少尾部
@@ -49,7 +44,7 @@ namespace ZFramework.Models
 
             #region 通过数据库验证是否存在权限
 
-            if (toControllerName != "Admin")//放行 Admin 控制器
+            if (toControllerName != "AdminController")//放行 AdminController 控制器
             {
                 #region 查询数据库上记录的权限
 
@@ -107,15 +102,15 @@ namespace ZFramework.Models
 
             #region 新增当前操作的日志
 
-            SqlParameter[] sqlInsertLogData =
-            {
-                new SqlParameter("@Type",SqlDbType.NChar){ Value = "InsertLogData" },
-                new SqlParameter("@UserID",SqlDbType.Int){ Value = userID },
-                new SqlParameter("@UserIP",SqlDbType.NChar){ Value = toUserIP },
-                new SqlParameter("@RequestPath",SqlDbType.NChar){ Value = toFilePath },
-                new SqlParameter("@Controller",SqlDbType.NChar){ Value = toControllerName },
-            };
-            Models.StaticData.myDal.UpdateData("LogManage", sqlInsertLogData);
+            //SqlParameter[] sqlInsertLogData =
+            //{
+            //    new SqlParameter("@Type",SqlDbType.NChar){ Value = "InsertLogData" },
+            //    new SqlParameter("@UserID",SqlDbType.Int){ Value = userID },
+            //    new SqlParameter("@UserIP",SqlDbType.NChar){ Value = toUserIP },
+            //    new SqlParameter("@RequestPath",SqlDbType.NChar){ Value = toFilePath },
+            //    new SqlParameter("@Controller",SqlDbType.NChar){ Value = toControllerName },
+            //};
+            //Models.StaticData.myDal.UpdateData("LogManage", sqlInsertLogData);
 
             #endregion 新增当前操作的日志
         }
@@ -127,7 +122,7 @@ namespace ZFramework.Models
         /// <returns>是否通过</returns>
         private bool PointToPointLogin_V(AuthorizationContext filterContext)
         {
-            //是否只允许一处登陆
+            //是否只允许一处登录
             if (!Convert.ToBoolean(filterContext.HttpContext.Session["Single"])) return true;
 
             //查询用户的信息
@@ -162,7 +157,7 @@ namespace ZFramework.Models
         /// <returns>是否成功</returns>
         public static bool PointToPointLogin_G(Controller controller)
         {
-            //是否只允许一处登陆
+            //是否只允许一处登录
             if (!Convert.ToBoolean(controller.Session["Single"])) return false;
 
             //随机码

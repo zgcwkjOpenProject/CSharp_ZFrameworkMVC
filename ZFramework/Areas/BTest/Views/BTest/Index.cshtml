@@ -27,8 +27,8 @@
                     </div>
                 </div>
             </div>
-            <div class="layui-form" id="table-list">
-                <table class="layui-table" id="TableData"></table>
+            <div class="layui-form" id="TablePrint">
+                <table class="layui-table" lay-filter="TableData" id="TableData"></table>
             </div>
         </div>
     </div>
@@ -108,8 +108,8 @@
                     {
                         field: 'canteenOperat', title: '操作', templet: function (d) {
                             var html = '';
-                            html += '<a class="layui-btn layui-btn-warm layui-btn-sm update hidden" onclick="UpdateDate(' + d.LAY_TABLE_INDEX + ')">修改</a>';
-                            html += '<a class="layui-btn layui-btn-danger layui-btn-sm delete hidden" onclick="DeleteDate(' + d.LAY_TABLE_INDEX + ')">删除</a>';
+                            html += '<a class="layui-btn layui-btn-warm layui-btn-sm update layui-hide" onclick="UpdateDate(' + d.LAY_TABLE_INDEX + ')">修改</a>';
+                            html += '<a class="layui-btn layui-btn-danger layui-btn-sm delete layui-hide" onclick="DeleteDate(' + d.LAY_TABLE_INDEX + ')">删除</a>';
                             return html
                         }, fixed: 'right', width: 130
                     },
@@ -152,8 +152,9 @@
         function InsertDate() {
             layer.open({
                 shade: 0.4,
+                resize: false,
                 content: _html,
-                title: "新增BTest",
+                title: "新增测试表",
                 btn: ["确定", "取消"],
                 yes: function (index, layero) {
                     var TestName = $("#TestName").val();
@@ -184,8 +185,9 @@
             var row = getData[index];
             layer.open({
                 shade: 0.4,
+                resize: false,
                 content: _html,
-                title: "修改BTest",
+                title: "修改测试表",
                 btn: ["确定", "取消"],
                 success: function (layero, index) {
                     $("#TestName").val(row.TestName);
@@ -237,7 +239,9 @@
                 deleteID = row.TestID;
             }
             layer.confirm('确定要删除吗？', {
-                btn: ['确定', '取消'] //按钮
+                shade: 0.4,
+                resize: false,
+                btn: ['确定', '取消'],
             }, function () {
                 $.post("/BTest/BTest/DeleteData", {
                     IDS: deleteID,

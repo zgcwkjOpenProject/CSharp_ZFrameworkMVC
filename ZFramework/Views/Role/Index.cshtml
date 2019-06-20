@@ -28,8 +28,8 @@
                     </div>
                 </div>
             </div>
-            <div class="layui-form" id="table-list">
-                <table class="layui-table" id="TableData"></table>
+            <div class="layui-form" id="TablePrint">
+                <table class="layui-table" lay-filter="TableData" id="TableData"></table>
             </div>
         </div>
     </div>
@@ -111,9 +111,9 @@
                     {
                         field: 'canteenOperat', title: '操作', templet: function (d) {
                             var html = '';
-                            html += '<a class="layui-btn layui-btn-warm layui-btn-sm update hidden" onclick="UpdateDate(' + d.LAY_TABLE_INDEX +')">修改</a>';
-                            html += '<a class="layui-btn layui-btn-danger layui-btn-sm update hidden" onclick="RoleDate(' + d.LAY_TABLE_INDEX +')">权限</a>';
-                            html += '<a class="layui-btn layui-btn-danger layui-btn-sm delete hidden" onclick="DeleteDate(' + d.LAY_TABLE_INDEX +')">删除</a>';
+                            html += '<a class="layui-btn layui-btn-warm layui-btn-sm update layui-hide" onclick="UpdateDate(' + d.LAY_TABLE_INDEX +')">修改</a>';
+                            html += '<a class="layui-btn layui-btn-danger layui-btn-sm update layui-hide" onclick="RoleDate(' + d.LAY_TABLE_INDEX +')">权限</a>';
+                            html += '<a class="layui-btn layui-btn-danger layui-btn-sm delete layui-hide" onclick="DeleteDate(' + d.LAY_TABLE_INDEX +')">删除</a>';
                             return html
                         }, fixed: 'right', width: 195
                     },
@@ -144,6 +144,7 @@
         function InsertDate() {
             layer.open({
                 shade: 0.4,
+                resize: false,
                 content: _html,
                 title: "新增角色",
                 btn: ["确定", "取消"],
@@ -172,6 +173,7 @@
             var row = getData[index];
             layer.open({
                 shade: 0.4,
+                resize: false,
                 content: _html,
                 title: "修改角色",
                 btn: ["确定", "取消"],
@@ -219,7 +221,9 @@
                 deleteID = row.RoleID;
             }
             layer.confirm('确定要删除吗？', {
-                btn: ['确定', '取消'] //按钮
+                shade: 0.4,
+                resize: false,
+                btn: ['确定', '取消'],
             }, function () {
                 $.post("/Role/DeleteRoleData", {
                     IDS: deleteID,
@@ -249,8 +253,9 @@
             }, function (data) {
                 layer.open({
                     shade: 0.4,
+                    resize: false,
                     content: "<div id='RoleDetail'>" + data + "</div>",
-                    title: "权限按钮",
+                    title: "权限调整",
                     btn: ["确定", "取消"],
                     yes: function (layero, index) {
                         var getform = $("#RoleDetail").find("input");

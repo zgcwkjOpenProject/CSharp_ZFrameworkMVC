@@ -1,9 +1,4 @@
-﻿/*
-代码生成器 V 1.9.0.3 zgcwkj
-生成时间：2019年03月02日
-在使用过程中应当保留原作者相关版权
-*/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -62,6 +57,44 @@ namespace ZFramework.Controllers
                 #endregion SQL查询方法
 
                 return Json(new { status = 0, message = "成功", total, rows = ListReturn }, JsonRequestBehavior.DenyGet);
+            }
+            catch
+            {
+                return Json(new { status = -1, message = "失败" }, JsonRequestBehavior.DenyGet);
+            }
+        }
+
+        /// <summary>
+        /// 新增日志数据
+        /// </summary>
+        /// <param name="FilePath">请求地址</param>
+        /// <param name="ControllerName">控制器名称</param>
+        /// <returns></returns>
+        public ActionResult InsertLogData(string FilePath, string ControllerName)
+        {
+            if (FilePath == null || ControllerName == null) { return null; }
+            if (FilePath == "" || ControllerName == "") { return null; }
+
+            try
+            {
+                #region SQL操作方法
+
+                var userID = Session["UserID"];//用户ID
+                var toUserIP = Request.UserHostAddress;//用户IP
+
+                SqlParameter[] sqlInsertLogData =
+                {
+                    new SqlParameter("@Type",SqlDbType.NChar){ Value = "InsertLogData" },
+                    new SqlParameter("@UserID",SqlDbType.Int){ Value = userID },
+                    new SqlParameter("@UserIP",SqlDbType.NChar){ Value = toUserIP },
+                    new SqlParameter("@RequestPath",SqlDbType.NChar){ Value = FilePath },
+                    new SqlParameter("@Controller",SqlDbType.NChar){ Value = ControllerName },
+                };
+                Models.StaticData.myDal.UpdateData("LogManage", sqlInsertLogData);
+
+                #endregion SQL操作方法
+
+                return Json(new { status = 0, message = "成功" }, JsonRequestBehavior.DenyGet);
             }
             catch
             {

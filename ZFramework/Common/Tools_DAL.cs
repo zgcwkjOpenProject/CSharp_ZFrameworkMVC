@@ -1,9 +1,4 @@
-﻿/*
-代码生成器 V 1.9.0.3 zgcwkj
-生成时间：2019年03月02日
-在使用过程中应当保留原作者相关版权
-*/
-using System;
+﻿using System;
 using System.Data;
 using System.Reflection;
 using System.Data.SqlClient;
@@ -15,61 +10,226 @@ namespace ZFramework.Common
     {
         #region 连接字符串
 
-        private string strConnect = new Tools_Config().Inquire("DatabaseConnect");
+        //private readonly string strConnect = @"Data Source=(local);Initial Catalog=ZFramework;User ID=sa;Password=123;";
+        //
+        //Trusted_Connection=yes;可信连接(Windows身份登录)
+        //把连接字符串放到 Web.config 中
+        //在<appSettings></appSettings>标签内添加
+        //<add key="DatabaseConnect" value="Data Source=(local);Initial Catalog=ZFramework;User ID=sa;Password=123" />
+        //把上面的 strConnect 注释掉，取消下面的注释即可
+        private readonly string strConnect = new Tools_Config().Inquire("DatabaseConnect");
 
         #endregion 连接字符串
 
         #region 查询数据表（DataTable）
 
-        public DataTable QueryDataTable(string sql, SqlParameter[] param)
+        /// <summary>
+        /// 查询数据表（存储过程）
+        /// </summary>
+        /// <param name="storedProcedureName">存储过程名称</param>
+        /// <param name="sqlParameter">SQL参数</param>
+        /// <returns>DataTable</returns>
+        public DataTable QueryDataTable(string storedProcedureName, params SqlParameter[] sqlParameter)
         {
-            DataTable dt = new DataTable();
-            using (SqlConnection conn = new SqlConnection(strConnect))
+            DataTable dataTable = new DataTable();
+            using (SqlConnection sqlConnection = new SqlConnection(strConnect))
             {
-                conn.Open();
-                SqlDataAdapter da = new SqlDataAdapter(sql, conn);
-                da.SelectCommand.CommandType = CommandType.StoredProcedure;
-                da.SelectCommand.Parameters.AddRange(param);
-                da.Fill(dt);
-                conn.Close();
+                try
+                {
+                    sqlConnection.Open();
+                    SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(storedProcedureName, sqlConnection);
+                    sqlDataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    sqlDataAdapter.SelectCommand.Parameters.AddRange(sqlParameter);
+                    sqlDataAdapter.Fill(dataTable);
+                }
+                catch (Exception e)
+                {
+                    string message = e.Message;
+                    throw;
+                }
+                finally
+                {
+                    sqlConnection.Close();
+                }
             }
-            return dt;
+            return dataTable;
         }
 
         #endregion 查询数据表（DataTable）
 
         #region 查询数据表（List）
 
-        public List<Dictionary<string, object>> QueryList(string sql, SqlParameter[] param)
+        /// <summary>
+        /// 查询数据表（存储过程）
+        /// </summary>
+        /// <param name="storedProcedureName">存储过程名称</param>
+        /// <param name="sqlParameter">SQL参数</param>
+        /// <returns>List</returns>
+        public List<Dictionary<string, object>> QueryList(string storedProcedureName, params SqlParameter[] sqlParameter)
         {
-            DataTable dt = new DataTable();
-            using (SqlConnection conn = new SqlConnection(strConnect))
+            DataTable dataTable = new DataTable();
+            using (SqlConnection sqlConnection = new SqlConnection(strConnect))
             {
-                conn.Open();
-                SqlDataAdapter da = new SqlDataAdapter(sql, conn);
-                da.SelectCommand.CommandType = CommandType.StoredProcedure;
-                da.SelectCommand.Parameters.AddRange(param);
-                da.Fill(dt);
-                conn.Close();
+                try
+                {
+                    sqlConnection.Open();
+                    SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(storedProcedureName, sqlConnection);
+                    sqlDataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+                    sqlDataAdapter.SelectCommand.Parameters.AddRange(sqlParameter);
+                    sqlDataAdapter.Fill(dataTable);
+                }
+                catch (Exception e)
+                {
+                    string message = e.Message;
+                    throw;
+                }
+                finally
+                {
+                    sqlConnection.Close();
+                }
             }
-            return DtToList(dt);
+            return ToList(dataTable);
         }
 
         #endregion 查询数据表（List）
 
         #region 插入、更新、删除
 
-        public int UpdateData(string sql, SqlParameter[] param)
+        /// <summary>
+        /// 插入、更新、删除（存储过程）
+        /// </summary>
+        /// <param name="storedProcedureName">存储过程名称</param>
+        /// <param name="sqlParameter">SQL参数</param>
+        /// <returns>变化的条数</returns>
+        public int UpdateData(string storedProcedureName, params SqlParameter[] sqlParameter)
         {
             int count = 0;
-            using (SqlConnection conn = new SqlConnection(strConnect))
+            using (SqlConnection sqlConnection = new SqlConnection(strConnect))
             {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddRange(param);
-                count = cmd.ExecuteNonQuery();
-                conn.Close();
+                try
+                {
+                    sqlConnection.Open();
+                    SqlCommand sqlCommand = new SqlCommand(storedProcedureName, sqlConnection);
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.Parameters.AddRange(sqlParameter);
+                    count = sqlCommand.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    string message = e.Message;
+                    throw;
+                }
+                finally
+                {
+                    sqlConnection.Close();
+                }
+            }
+            return count;
+        }
+
+        #endregion 插入、更新、删除
+
+        #region 执行SQL语句数据表（DataTable）
+
+        /// <summary>
+        /// 查询数据表（存储语句）
+        /// </summary>
+        /// <param name="sqlStatement">SQL语句</param>
+        /// <param name="sqlParameter">SQL参数</param>
+        /// <returns>DataTable</returns>
+        public DataTable ExecuteSqlStatementToDataTable(string sqlStatement, params SqlParameter[] sqlParameter)
+        {
+            DataTable dataTable = new DataTable();
+            using (SqlConnection sqlConnection = new SqlConnection(strConnect))
+            {
+                try
+                {
+                    sqlConnection.Open();
+                    SqlCommand sqlCommand = new SqlCommand(sqlStatement, sqlConnection);
+                    SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+                    sqlCommand.Parameters.AddRange(sqlParameter);
+                    sqlDataAdapter.Fill(dataTable);
+                }
+                catch (Exception e)
+                {
+                    string message = e.Message;
+                    throw;
+                }
+                finally
+                {
+                    sqlConnection.Close();
+                }
+            }
+            return dataTable;
+        }
+
+        #endregion 执行SQL语句数据表（DataTable）
+
+        #region 执行SQL语句数据表（List）
+
+        /// <summary>
+        /// 查询数据表（存储语句）
+        /// </summary>
+        /// <param name="sqlStatement">SQL语句</param>
+        /// <param name="sqlParameter">SQL参数</param>
+        /// <returns>List</returns>
+        public List<Dictionary<string, object>> ExecuteSqlStatementToList(string sqlStatement, params SqlParameter[] sqlParameter)
+        {
+            DataTable dataTable = new DataTable();
+            using (SqlConnection sqlConnection = new SqlConnection(strConnect))
+            {
+                try
+                {
+                    sqlConnection.Open();
+                    SqlCommand sqlCommand = new SqlCommand(sqlStatement, sqlConnection);
+                    SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand);
+                    sqlCommand.Parameters.AddRange(sqlParameter);
+                    sqlDataAdapter.Fill(dataTable);
+                }
+                catch (Exception e)
+                {
+                    string message = e.Message;
+                    throw;
+                }
+                finally
+                {
+                    sqlConnection.Close();
+                }
+            }
+            return ToList(dataTable);
+        }
+
+        #endregion 执行SQL语句数据表（List）
+
+        #region 插入、更新、删除
+
+        /// <summary>
+        /// 插入、更新、删除（存储语句）
+        /// </summary>
+        /// <param name="sqlStatement">SQL语句</param>
+        /// <param name="sqlParameter">SQL参数</param>
+        /// <returns>变化的条数</returns>
+        public int ExecuteSqlStatementUpdateData(string sqlStatement, params SqlParameter[] sqlParameter)
+        {
+            int count = 0;
+            using (SqlConnection sqlConnection = new SqlConnection(strConnect))
+            {
+                try
+                {
+                    sqlConnection.Open();
+                    SqlCommand sqlCommand = new SqlCommand(sqlStatement, sqlConnection);
+                    sqlCommand.Parameters.AddRange(sqlParameter);
+                    count = sqlCommand.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    string message = e.Message;
+                    throw;
+                }
+                finally
+                {
+                    sqlConnection.Close();
+                }
             }
             return count;
         }
@@ -78,23 +238,40 @@ namespace ZFramework.Common
 
         #region 二进制文件查询方法
 
-        public byte[] QueryDataByte(string sql, SqlParameter[] param)
+        /// <summary>
+        /// 二进制文件查询方法
+        /// </summary>
+        /// <param name="storedProcedureName">存储过程名称</param>
+        /// <param name="sqlParameter">SQL参数</param>
+        /// <returns>二进制</returns>
+        public byte[] QueryDataByte(string storedProcedureName, params SqlParameter[] sqlParameter)
         {
-            using (SqlConnection conn = new SqlConnection(strConnect))
+            byte[] File = null;
+            using (SqlConnection sqlConnection = new SqlConnection(strConnect))
             {
-                conn.Open();
-                SqlDataReader dr = null;
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddRange(param);
-                dr = cmd.ExecuteReader();
-                byte[] File = null;
-                if (dr.Read())
+                try
                 {
-                    File = (byte[])dr[0];
+                    sqlConnection.Open();
+                    SqlDataReader sqlDataReader = null;
+                    SqlCommand sqlCommand = new SqlCommand(storedProcedureName, sqlConnection);
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.Parameters.AddRange(sqlParameter);
+                    sqlDataReader = sqlCommand.ExecuteReader();
+                    if (sqlDataReader.Read())
+                    {
+                        File = (byte[])sqlDataReader[0];
+                    }
+                    sqlDataReader.Close();
                 }
-                dr.Close();
-                conn.Close();
+                catch (Exception e)
+                {
+                    string message = e.Message;
+                    throw;
+                }
+                finally
+                {
+                    sqlConnection.Close();
+                }
                 return File;
             }
         }
@@ -103,13 +280,18 @@ namespace ZFramework.Common
 
         #region DataTable 转换成 List
 
-        public List<Dictionary<string, object>> DtToList(DataTable dt)
+        /// <summary>
+        /// DataTable 转换成 List
+        /// </summary>
+        /// <param name="dataTable">需要转换的 DataTable</param>
+        /// <returns>转换后的 List</returns>
+        public List<Dictionary<string, object>> ToList(DataTable dataTable)
         {
             List<Dictionary<string, object>> list = new List<Dictionary<string, object>>();
-            foreach (DataRow dataRow in dt.Rows)
+            foreach (DataRow dataRow in dataTable.Rows)
             {
                 Dictionary<string, object> dictionary = new Dictionary<string, object>();
-                foreach (DataColumn dataColumn in dt.Columns)
+                foreach (DataColumn dataColumn in dataTable.Columns)
                 {
                     dictionary.Add(dataColumn.ColumnName, dataRow[dataColumn.ColumnName]);
                 }
@@ -122,28 +304,33 @@ namespace ZFramework.Common
 
         #region List 转换成 DataTable
 
+        /// <summary>
+        /// List 转换成 DataTable
+        /// </summary>
+        /// <param name="list">需要转换的 List</param>
+        /// <returns>转换后的 DataTable</returns>
         public DataTable ToDataTable(List<Dictionary<string, object>> list)
         {
-            DataTable tb = new DataTable();
-            if (list.Count>0)
+            DataTable dataTable = new DataTable();
+            if (list.Count > 0)
             {
                 //==>创建 Table 表头
                 foreach (KeyValuePair<string, object> keyValuePair in list[0])
                 {
-                    tb.Columns.Add(keyValuePair.Key, typeof(string));
+                    dataTable.Columns.Add(keyValuePair.Key, typeof(string));
                 }
                 //==>创建 Table 数据
                 foreach (Dictionary<string, object> dictionary in list)
                 {
-                    DataRow dr = tb.NewRow();
+                    DataRow dr = dataTable.NewRow();
                     foreach (KeyValuePair<string, object> keyValuePair in dictionary)
                     {
                         dr[keyValuePair.Key] = keyValuePair.Value;
                     }
-                    tb.Rows.Add(dr);
+                    dataTable.Rows.Add(dr);
                 }
             }
-            return tb;
+            return dataTable;
         }
 
         #endregion List 转换成 DataTable

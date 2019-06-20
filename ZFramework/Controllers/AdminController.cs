@@ -1,9 +1,4 @@
-﻿/*
-代码生成器 V 1.9.0.3 zgcwkj
-生成时间：2019年03月02日
-在使用过程中应当保留原作者相关版权
-*/
-using System;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.Mvc;
@@ -15,14 +10,15 @@ namespace ZFramework.Controllers
     /// </summary>
     public class AdminController : Controller
     {
-        #region 登陆页面、登陆验证码、登陆验证、登陆用户
+        #region 登录页面、登录验证码、登录验证、登录用户
 
         /// <summary>
-        /// 登陆页面
+        /// 登录页面
         /// </summary>
         /// <returns></returns>
         public ActionResult Index()
         {
+            if (Session["Accounts"] != null) return RedirectToAction("Admin"); //重定向到Admin
             if (Session["Accounts"] != null) ViewData["Accounts"] = Session["Accounts"].ToString();//账号
             if (Session["Password"] != null) ViewData["Password"] = Session["Password"].ToString();//密码
             if (Session["Remember"] != null) ViewData["Remember"] = Session["Remember"].ToString();//记住密码
@@ -43,7 +39,7 @@ namespace ZFramework.Controllers
         }
 
         /// <summary>
-        /// 登陆验证
+        /// 登录验证
         /// </summary>
         /// <param name="rememberMe">是否记住用户</param>
         /// <param name="accounts">用户账号</param>
@@ -64,7 +60,7 @@ namespace ZFramework.Controllers
                     if (rememberMe != "" && accounts != "" && password != "" && captcha != "" && timestamp != "")
                     {
                         TimeSpan timeSpan = Common.Tools_Date.DateDiff2(DateTime.Now, Common.Tools_Date.GetTime(timestamp));
-                        if (timeSpan.TotalSeconds < 120)//在打开网页的两分钟内必须完成登陆
+                        if (timeSpan.TotalSeconds < 120)//在打开网页的两分钟内必须完成登录
                         {
                             string validateCode = Session["ValidateCode"].ToString();
                             if (validateCode.ToLower() == captcha.ToLower())
@@ -89,7 +85,7 @@ namespace ZFramework.Controllers
                                     passwords = Common.Tools_MD5.GetMd5(passwords);
                                     if (dtUser.Rows[0]["Password"].ToString() == passwords)
                                     {
-                                        returnJson.Message = "登陆成功，马上跳转";
+                                        returnJson.Message = "登录成功，马上跳转";
                                         returnJson.Status = true;
 
                                         #region 重要的数据存储到Session中
@@ -135,7 +131,7 @@ namespace ZFramework.Controllers
             return Json(returnJson, JsonRequestBehavior.DenyGet);
         }
 
-        #endregion 登陆页面、登陆验证码、登陆验证、登陆用户
+        #endregion 登录页面、登录验证码、登录验证、登录用户
 
         #region 后台面板、后台面板生成、修改个人信息、退出登录
 
@@ -150,8 +146,8 @@ namespace ZFramework.Controllers
 
             SqlParameter[] sql =
             {
-                new SqlParameter("@Type",SqlDbType.NChar){ Value="InquireMenu"},
-                new SqlParameter("@RoleID",SqlDbType.NChar){ Value=Session["RoleID"]},
+                new SqlParameter("@Type",SqlDbType.NChar){ Value = "InquireMenu"},
+                new SqlParameter("@RoleID",SqlDbType.NChar){ Value = Session["RoleID"]},
             };
             DataTable dtMenu = Models.StaticData.myDal.QueryDataTable("AdminManage", sql);
 
@@ -220,6 +216,27 @@ namespace ZFramework.Controllers
             #endregion 动态生成左侧功能
 
             return View();
+        }
+
+        /// <summary>
+        /// 后台菜单
+        /// </summary>
+        /// <returns></returns>
+        [Models.Authorization]
+        public ActionResult Menu()
+        {
+            #region SQL查询拥有的菜单
+
+            SqlParameter[] sql =
+            {
+                new SqlParameter("@Type",SqlDbType.NChar){ Value = "InquireMenu"},
+                new SqlParameter("@RoleID",SqlDbType.NChar){ Value = Session["RoleID"]},
+            };
+            var listMenu = Models.StaticData.myDal.QueryList("AdminManage", sql);
+
+            #endregion SQL查询拥有的菜单
+
+            return Json(listMenu, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>

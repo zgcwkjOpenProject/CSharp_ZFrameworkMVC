@@ -21,13 +21,13 @@
             <div>
                 <h1><b>Z</b>F</h1>
             </div>
-            <h3>欢迎登陆</h3>
+            <h3>欢迎登录</h3>
             <div class="m-t" role="form">
                 <div class="form-group">
                     <input type="email" class="form-control" id="accounts" placeholder="请输入登录账号" value="@ViewData["Accounts"]">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" id="password" placeholder="请输入登陆密码" value="@ViewData["Password"]">
+                    <input type="password" class="form-control" id="password" placeholder="请输入登录密码" value="@ViewData["Password"]">
                 </div>
                 <div class="form-group">
                     <div class="col-xs-5" style="padding:0px;">
@@ -85,14 +85,14 @@
         function Registered() {
             toastr.info("该功能未开放");
         }
-        //登陆后台
+        //登录后台
         function Login() {
             var rememberMe = $("#rememberMe").prop("checked");
             var accounts = $("#accounts").val();
             var password = $("#password").val();
             var captcha = $("#captcha").val();
-            if (accounts == "") { toastr.error("请输入登陆账号"); return; }
-            if (password == "") { toastr.error("请输入登陆密码"); return; }
+            if (accounts == "") { toastr.error("请输入登录账号"); return; }
+            if (password == "") { toastr.error("请输入登录密码"); return; }
             if (captcha == "") { toastr.error("请输入验证码"); return; }
             if (captcha.length != 6) { toastr.error("验证码长度不正确"); return; }
             //发起网络请求

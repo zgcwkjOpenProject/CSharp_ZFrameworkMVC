@@ -7,7 +7,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{89DCE116-EDBF-4073-B389-58165A813466}</ProjectGuid>
+    <ProjectGuid>{F3CB786F-A10A-45D2-B81E-2CF92FFF88C4}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -116,7 +116,6 @@
     <Content Include="Resource\Content\css\plugins\zg-check\zg-check.css" />
     <Content Include="Resource\Content\css\scrollbar.css" />
     <Content Include="Resource\Content\css\style.min.css" />
-    <Content Include="Resource\Content\echarts\echarts-all.js" />
     <Content Include="Resource\Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Resource\Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Resource\Content\img\background.jpg" />
@@ -273,11 +272,11 @@
     <Compile Include="Common\Tools_Config.cs" />
     <Compile Include="Common\Tools_DAL.cs" />
     <Compile Include="Common\Tools_Date.cs" />
+    <Compile Include="Common\Tools_HttpMethod.cs" />
     <Compile Include="Common\Tools_Json.cs" />
     <Compile Include="Common\Tools_Mail.cs" />
     <Compile Include="Common\Tools_MD5.cs" />
     <Compile Include="Common\Tools_RandomCode.cs" />
-    <Compile Include="Common\Tools_TcpNetwork.cs" />
     <Compile Include="Common\Tools_Unicode.cs" />
     <Compile Include="Common\Tools_ValidateCode.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -350,9 +349,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>50214</DevelopmentServerPort>
+          <DevelopmentServerPort>40275</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50214/</IISUrl>
+          <IISUrl>http://localhost:40275/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
