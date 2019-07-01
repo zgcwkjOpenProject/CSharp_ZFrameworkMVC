@@ -142,78 +142,7 @@ namespace ZFramework.Controllers
         [Models.Authorization]
         public ActionResult Admin()
         {
-            #region SQL查询拥有的菜单
-
-            SqlParameter[] sql =
-            {
-                new SqlParameter("@Type",SqlDbType.NChar){ Value = "InquireMenu"},
-                new SqlParameter("@RoleID",SqlDbType.NChar){ Value = Session["RoleID"]},
-            };
-            DataTable dtMenu = Models.StaticData.myDal.QueryDataTable("AdminManage", sql);
-
-            #endregion SQL查询拥有的菜单
-
-            #region 动态生成左侧功能
-
-            //页面填写 @Html.Raw(ViewBag.Html)
-            string _html = "";//输出到页面
-            if (dtMenu.Rows.Count > 0)
-            {
-                foreach (DataRow dtMenu1 in dtMenu.Rows)
-                {
-                    if (dtMenu1["ParentID"].ToString() == "0")//父ID为0
-                    {
-                        string Title_1 = dtMenu1["Title"].ToString();//一级菜单名称
-                        string Icon_1 = dtMenu1["Icon"].ToString();//一级菜单图标
-                        string Link_1 = dtMenu1["Link"].ToString();//一级菜单连接
-                        string RBehavior_1 = dtMenu1["RBehavior"].ToString();//二级菜单权限
-
-                        _html += "<li>";
-                        if (Link_1.Trim() == "")
-                        {
-                            _html += "<a href='javascript:void(0);'>";
-                            if (Icon_1 != "") _html += "<i class='" + Icon_1 + "'></i>";
-                            _html += "<span class='nav-label'>" + Title_1 + "</span>";
-                            _html += "<span class='fa arrow'></span>";
-                            _html += "</a>";
-                            foreach (DataRow dtMenu2 in dtMenu.Rows)
-                            {
-                                if (dtMenu1["MenuID"].ToString() == dtMenu2["ParentID"].ToString())
-                                {
-                                    string Title_2 = dtMenu2["Title"].ToString();//二级菜单名称
-                                    string Icon_2 = dtMenu2["Icon"].ToString();//二级菜单图标
-                                    string Link_2 = dtMenu2["Link"].ToString();//二级菜单连接
-                                    string RBehavior_2 = dtMenu2["RBehavior"].ToString();//二级菜单权限
-
-                                    _html += "<ul class='nav nav-second-level'>";
-
-                                    _html += "<li>";
-                                    _html += "<a class='J_menuItem' href='" + Link_2 + "?Behavior=" + RBehavior_2 + "'>";
-                                    if (Icon_2 != "") _html += "<i class='" + Icon_2 + "'></i>";
-                                    _html += "<span class='nav-label'>" + Title_2 + "</span>";
-                                    _html += "</a>";
-                                    _html += "</li>";
-
-                                    _html += "</ul>";
-                                }
-                            }
-                            _html += "";
-                        }
-                        else
-                        {
-                            _html += "<a class='J_menuItem' href='" + Link_1 + "?Behavior=" + RBehavior_1 + "'>";
-                            if (Icon_1 != "") _html += "<i class='" + Icon_1 + "'></i>";
-                            _html += "<span class='nav-label'>" + Title_1 + "</span>";
-                            _html += "</a>";
-                        }
-                        _html += "</li>";
-                    }
-                }
-            }
-            ViewBag.Html = _html;//输出到页面
             ViewData["UserName"] = Session["UserName"].ToString();//用户名称
-
-            #endregion 动态生成左侧功能
 
             return View();
         }
@@ -236,7 +165,7 @@ namespace ZFramework.Controllers
 
             #endregion SQL查询拥有的菜单
 
-            return Json(listMenu, JsonRequestBehavior.AllowGet);
+            return Json(listMenu, JsonRequestBehavior.DenyGet);
         }
 
         /// <summary>

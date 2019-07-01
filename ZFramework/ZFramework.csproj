@@ -124,8 +124,10 @@
     <Content Include="Resource\Content\js\base64.js" />
     <Content Include="Resource\Content\js\bootstrap.js" />
     <Content Include="Resource\Content\js\bootstrap.min.js" />
+    <Content Include="Resource\Content\js\contabs.js" />
     <Content Include="Resource\Content\js\contabs.min.js" />
     <Content Include="Resource\Content\js\content.min.js" />
+    <Content Include="Resource\Content\js\hplus.js" />
     <Content Include="Resource\Content\js\hplus.min.js" />
     <Content Include="Resource\Content\js\jquery-3.3.1.js" />
     <Content Include="Resource\Content\js\jquery-3.3.1.min.js" />

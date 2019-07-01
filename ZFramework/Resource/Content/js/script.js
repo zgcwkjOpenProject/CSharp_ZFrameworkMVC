@@ -34,56 +34,6 @@ function RoleControl() {
     }
 }
 
-//前台菜单生成
-function MenuGenerate(listData) {
-    var _html = "";//输出到页面
-    for (var i = 0; i < listData.length; i++) {
-        if (listData[i].ParentID == 0) {
-            var Title_1 = listData[i].Title;//一级菜单名称
-            var Icon_1 = listData[i].Icon;//一级菜单图标
-            var Link_1 = listData[i].Link;//一级菜单连接
-            var RBehavior_1 = listData[i].RBehavior;//二级菜单权限
-
-            _html += "<li>";
-            if (Link_1.trim() == "") {
-                _html += "<a href='javascript:void(0);'>";
-                if (Icon_1 != "") _html += "<i class='" + Icon_1 + "'></i>";
-                _html += "<span class='nav-label'>" + Title_1 + "</span>";
-                _html += "<span class='fa arrow'></span>";
-                _html += "</a>";
-                for (var ii = 0; ii < listData.length; ii++) {
-                    if (listData[i].MenuID.toString() == listData[ii].ParentID.toString()) {
-                        var Title_2 = listData[ii].Title;//二级菜单名称
-                        var Icon_2 = listData[ii].Icon;//二级菜单图标
-                        var Link_2 = listData[ii].Link;//二级菜单连接
-                        var RBehavior_2 = listData[ii].RBehavior;//二级菜单权限
-
-                        _html += "<ul class='nav nav-second-level'>";
-
-                        _html += "<li>";
-                        _html += "<a class='J_menuItem' href='" + Link_2 + "?Behavior=" + RBehavior_2 + "' data-index='" + ii + "'>";
-                        if (Icon_2 != "") _html += "<i class='" + Icon_2 + "'></i>";
-                        _html += "<span class='nav-label'>" + Title_2 + "</span>";
-                        _html += "</a>";
-                        _html += "</li>";
-
-                        _html += "</ul>";
-                    }
-                }
-                _html += "";
-            }
-            else {
-                _html += "<a class='J_menuItem' href='" + Link_1 + "?Behavior=" + RBehavior_1 + "' data-index='" + i + "'>";
-                if (Icon_1 != "") _html += "<i class='" + Icon_1 + "'></i>";
-                _html += "<span class='nav-label'>" + Title_1 + "</span>";
-                _html += "</a>";
-            }
-            _html += "</li>";
-        }
-    }
-    document.getElementById("side-menu").innerHTML += _html;
-}
-
 //下拉框绑定数据
 function SelectBinding(name, url) {
     $.post(url, function (data) {

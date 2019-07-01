@@ -28,7 +28,6 @@
                             <b>Z</b>F
                         </div>
                     </li>
-                    @Html.Raw(ViewBag.Html)
                 </ul>
             </div>
         </nav>
@@ -91,14 +90,17 @@
     <script src="~/Resource/Content/js/bootstrap.min.js"></script>
     <script src="~/Resource/Content/js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="~/Resource/Content/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="~/Resource/Content/js/hplus.min.js"></script>
-    <script src="~/Resource/Content/js/contabs.min.js"></script>
     <script src="~/Resource/Content/js/plugins/pace/pace.min.js"></script>
+    <script src="~/Resource/Content/js/hplus.min.js"></script>
     <script>
         //Layui 初始化
         var layer, table, laydate, form;
         layui.use(['layer', 'table', 'laydate', 'form'], function () {
             layer = layui.layer, table = layui.table, laydate = layui.laydate, form = layui.form;
+            //获取菜单并展示
+            $.post("/Admin/Menu", function (data) {
+                MenuGenerate(data);
+            });
         });
         //修改用户账号和密码
         var _html = "";
