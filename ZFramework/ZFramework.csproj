@@ -272,6 +272,7 @@
     <Compile Include="Areas\BTest\Controllers\BTestController.cs" />
     <Compile Include="Common\Tools_Base64.cs" />
     <Compile Include="Common\Tools_Config.cs" />
+    <Compile Include="Common\Tools_Cookie.cs" />
     <Compile Include="Common\Tools_DAL.cs" />
     <Compile Include="Common\Tools_Date.cs" />
     <Compile Include="Common\Tools_HttpMethod.cs" />

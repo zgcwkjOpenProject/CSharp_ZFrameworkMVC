@@ -133,20 +133,12 @@ namespace ZFramework.Models
             };
             DataTable dtInquireVerify = Models.StaticData.myDal.QueryDataTable("AdminManage", sql);
             //--> 读取Cookie
-            HttpCookie cookie = HttpContext.Current.Request.Cookies["Landing"];
-            if (cookie != null)
+            if (Common.Tools_Cookie.Read("Landing", "Verification") == dtInquireVerify.Rows[0]["Verify"].ToString())
             {
-                if (cookie["Verification"] != null)
-                {
-                    string Verification = HttpContext.Current.Server.UrlDecode(cookie["Verification"]);
-
-                    if (Verification == dtInquireVerify.Rows[0]["Verify"].ToString())
-                    {
-                        filterContext.HttpContext.Session["Single"] = dtInquireVerify.Rows[0]["Single"].ToString();
-                        return true;
-                    }
-                }
+                filterContext.HttpContext.Session["Single"] = dtInquireVerify.Rows[0]["Single"].ToString();
+                return true;
             }
+
             return false;
         }
 
@@ -174,10 +166,7 @@ namespace ZFramework.Models
             Models.StaticData.myDal.UpdateData("AdminManage", sql);
 
             //-->  设置Cookie
-            HttpCookie cookie = new HttpCookie("Landing");
-            cookie["Verification"] = random;
-            cookie.Expires = DateTime.Now.AddDays(1);
-            controller.Response.Cookies.Add(cookie);
+            Common.Tools_Cookie.Write("Landing", "Verification", random, 1);
 
             return true;
         }
