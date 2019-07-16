@@ -1,17 +1,16 @@
 ﻿--表开始
-GO
 CREATE TABLE [dbo].[SMenu]([MenuID] [int] IDENTITY(1,1) NOT NULL,
 [ParentID] [int] NULL CONSTRAINT [DF_SMenu_ParentID]  DEFAULT ((0)),
-[Title] [nvarchar](max) NULL CONSTRAINT [DF_SMenu_Title]  DEFAULT (' '),
-[Icon] [nvarchar](max) NULL CONSTRAINT [DF_SMenu_Icon]  DEFAULT (' '),
-[Link] [nvarchar](max) NULL CONSTRAINT [DF_SMenu_Link]  DEFAULT (' '),
+[Title] [nvarchar](max) NULL CONSTRAINT [DF_SMenu_Title]  DEFAULT (''),
+[Icon] [nvarchar](max) NULL CONSTRAINT [DF_SMenu_Icon]  DEFAULT (''),
+[Link] [nvarchar](max) NULL CONSTRAINT [DF_SMenu_Link]  DEFAULT (''),
 [Sort] [int] NULL CONSTRAINT [DF_SMenu_Sort]  DEFAULT ((0)),
-[Behavior] [nvarchar](max) NULL CONSTRAINT [DF_SMenu_Behavior]  DEFAULT (' '),
+[Behavior] [nvarchar](max) NULL CONSTRAINT [DF_SMenu_Behavior]  DEFAULT (''),
 [IsDelete] [bit] NULL CONSTRAINT [DF_SMenu_IsDelete]  DEFAULT ((0)),
 [CreateTime] [datetime] NULL CONSTRAINT [DF_SMenu_CreateTime]  DEFAULT (getdate()),
 [CreatorID] [int] NULL CONSTRAINT [DF_SMenu_CreatorID]  DEFAULT ((0)),
 [Version] [int] NULL CONSTRAINT [DF_SMenu_Version]  DEFAULT ((0)),
-[Remark] [nvarchar](max) NULL CONSTRAINT [DF_SMenu_Remark]  DEFAULT (' '),
+[Remark] [nvarchar](max) NULL CONSTRAINT [DF_SMenu_Remark]  DEFAULT (''),
 CONSTRAINT [PK_ZFramework_SMenu] PRIMARY KEY CLUSTERED (MenuID ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY]
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'导航菜单ID' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'SMenu', @level2type=N'COLUMN',@level2name=N'MenuID'
@@ -40,12 +39,12 @@ EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'备注' , @lev
 --表开始
 GO
 CREATE TABLE [dbo].[SRole]([RoleID] [int] IDENTITY(1,1) NOT NULL,
-[RoleName] [nvarchar](max) NULL CONSTRAINT [DF_SRole_RoleName]  DEFAULT (' '),
+[RoleName] [nvarchar](max) NULL CONSTRAINT [DF_SRole_RoleName]  DEFAULT (''),
 [IsDelete] [bit] NULL CONSTRAINT [DF_SRole_IsDelete]  DEFAULT ((0)),
 [CreateTime] [datetime] NULL CONSTRAINT [DF_SRole_CreateTime]  DEFAULT (getdate()),
 [CreatorID] [int] NULL CONSTRAINT [DF_SRole_CreatorID]  DEFAULT ((0)),
 [Version] [int] NULL CONSTRAINT [DF_SRole_Version]  DEFAULT ((0)),
-[Remark] [nvarchar](max) NULL CONSTRAINT [DF_SRole_Remark]  DEFAULT (' '),
+[Remark] [nvarchar](max) NULL CONSTRAINT [DF_SRole_Remark]  DEFAULT (''),
 CONSTRAINT [PK_ZFramework_SRole] PRIMARY KEY CLUSTERED (RoleID ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY]
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'角色ID' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'SRole', @level2type=N'COLUMN',@level2name=N'RoleID'
@@ -66,12 +65,12 @@ GO
 CREATE TABLE [dbo].[SRoleDetail]([RoleDetailID] [int] IDENTITY(1,1) NOT NULL,
 [RoleID] [int] NULL CONSTRAINT [DF_SRoleDetail_RoleID]  DEFAULT ((0)),
 [MenuID] [int] NULL CONSTRAINT [DF_SRoleDetail_MenuID]  DEFAULT ((0)),
-[Behavior] [nvarchar](max) NULL CONSTRAINT [DF_SRoleDetail_Behavior]  DEFAULT (' '),
+[Behavior] [nvarchar](max) NULL CONSTRAINT [DF_SRoleDetail_Behavior]  DEFAULT (''),
 [IsDelete] [bit] NULL CONSTRAINT [DF_SRoleDetail_IsDelete]  DEFAULT ((0)),
 [CreateTime] [datetime] NULL CONSTRAINT [DF_SRoleDetail_CreateTime]  DEFAULT (getdate()),
 [CreatorID] [int] NULL CONSTRAINT [DF_SRoleDetail_CreatorID]  DEFAULT ((0)),
 [Version] [int] NULL CONSTRAINT [DF_SRoleDetail_Version]  DEFAULT ((0)),
-[Remark] [nvarchar](max) NULL CONSTRAINT [DF_SRoleDetail_Remark]  DEFAULT (' '),
+[Remark] [nvarchar](max) NULL CONSTRAINT [DF_SRoleDetail_Remark]  DEFAULT (''),
 CONSTRAINT [PK_ZFramework_SRoleDetail] PRIMARY KEY CLUSTERED (RoleDetailID ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY]
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'角色明细ID' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'SRoleDetail', @level2type=N'COLUMN',@level2name=N'RoleDetailID'
@@ -95,16 +94,16 @@ EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'备注' , @lev
 GO
 CREATE TABLE [dbo].[SUser]([UserID] [int] IDENTITY(1,1) NOT NULL,
 [RoleID] [int] NULL CONSTRAINT [DF_SUser_RoleID]  DEFAULT ((0)),
-[UserName] [nvarchar](max) NULL CONSTRAINT [DF_SUser_UserName]  DEFAULT (' '),
-[Accounts] [nvarchar](max) NULL CONSTRAINT [DF_SUser_Accounts]  DEFAULT (' '),
-[Password] [nvarchar](max) NULL CONSTRAINT [DF_SUser_Password]  DEFAULT (' '),
+[UserName] [nvarchar](max) NULL CONSTRAINT [DF_SUser_UserName]  DEFAULT (''),
+[Accounts] [nvarchar](max) NULL CONSTRAINT [DF_SUser_Accounts]  DEFAULT (''),
+[Password] [nvarchar](max) NULL CONSTRAINT [DF_SUser_Password]  DEFAULT (''),
 [Single] [bit] NULL CONSTRAINT [DF_SUser_Single]  DEFAULT ((0)),
-[Verify] [nvarchar](max) NULL CONSTRAINT [DF_SUser_Verify]  DEFAULT (' '),
+[Verify] [nvarchar](max) NULL CONSTRAINT [DF_SUser_Verify]  DEFAULT (''),
 [IsDelete] [bit] NULL CONSTRAINT [DF_SUser_IsDelete]  DEFAULT ((0)),
 [CreateTime] [datetime] NULL CONSTRAINT [DF_SUser_CreateTime]  DEFAULT (getdate()),
 [CreatorID] [int] NULL CONSTRAINT [DF_SUser_CreatorID]  DEFAULT ((0)),
 [Version] [int] NULL CONSTRAINT [DF_SUser_Version]  DEFAULT ((0)),
-[Remark] [nvarchar](max) NULL CONSTRAINT [DF_SUser_Remark]  DEFAULT (' '),
+[Remark] [nvarchar](max) NULL CONSTRAINT [DF_SUser_Remark]  DEFAULT (''),
 CONSTRAINT [PK_ZFramework_SUser] PRIMARY KEY CLUSTERED (UserID ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY]
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'用户ID' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'SUser', @level2type=N'COLUMN',@level2name=N'UserID'
@@ -134,14 +133,14 @@ EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'备注' , @lev
 GO
 CREATE TABLE [dbo].[SLog]([LogID] [int] IDENTITY(1,1) NOT NULL,
 [UserID] [int] NULL CONSTRAINT [DF_SLog_UserID]  DEFAULT ((0)),
-[UserIP] [nvarchar](max) NULL CONSTRAINT [DF_SLog_UserIP]  DEFAULT (' '),
-[RequestPath] [nvarchar](max) NULL CONSTRAINT [DF_SLog_RequestPath]  DEFAULT (' '),
-[Controller] [nvarchar](max) NULL CONSTRAINT [DF_SLog_Controller]  DEFAULT (' '),
+[UserIP] [nvarchar](max) NULL CONSTRAINT [DF_SLog_UserIP]  DEFAULT (''),
+[RequestPath] [nvarchar](max) NULL CONSTRAINT [DF_SLog_RequestPath]  DEFAULT (''),
+[Controller] [nvarchar](max) NULL CONSTRAINT [DF_SLog_Controller]  DEFAULT (''),
 [IsDelete] [bit] NULL CONSTRAINT [DF_SLog_IsDelete]  DEFAULT ((0)),
 [CreateTime] [datetime] NULL CONSTRAINT [DF_SLog_CreateTime]  DEFAULT (getdate()),
 [CreatorID] [int] NULL CONSTRAINT [DF_SLog_CreatorID]  DEFAULT ((0)),
 [Version] [int] NULL CONSTRAINT [DF_SLog_Version]  DEFAULT ((0)),
-[Remark] [nvarchar](max) NULL CONSTRAINT [DF_SLog_Remark]  DEFAULT (' '),
+[Remark] [nvarchar](max) NULL CONSTRAINT [DF_SLog_Remark]  DEFAULT (''),
 CONSTRAINT [PK_ZFramework_SLog] PRIMARY KEY CLUSTERED (LogID ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY]
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'日志ID' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'SLog', @level2type=N'COLUMN',@level2name=N'LogID'
@@ -166,7 +165,7 @@ EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'备注' , @lev
 
 GO
 SET IDENTITY_INSERT [dbo].[SMenu] ON 
-INSERT [dbo].[SMenu] ([MenuID], [ParentID], [Title], [Icon], [Link], [Sort], [Behavior]) VALUES (1, 0, N'系统设置', N'fa fa-gear', N' ', 999, N'show')
+INSERT [dbo].[SMenu] ([MenuID], [ParentID], [Title], [Icon], [Link], [Sort], [Behavior]) VALUES (1, 0, N'系统设置', N'fa fa-gear', N'', 999, N'show')
 INSERT [dbo].[SMenu] ([MenuID], [ParentID], [Title], [Icon], [Link], [Sort], [Behavior]) VALUES (2, 1, N'用户管理', N'fa fa-user', N'/User', 1, N'index,inquire,insert,update,delete,print')
 INSERT [dbo].[SMenu] ([MenuID], [ParentID], [Title], [Icon], [Link], [Sort], [Behavior]) VALUES (3, 1, N'角色管理', N'fa fa-users', N'/Role', 2, N'index,inquire,insert,update,delete,print')
 INSERT [dbo].[SMenu] ([MenuID], [ParentID], [Title], [Icon], [Link], [Sort], [Behavior]) VALUES (4, 1, N'系统日志', N'fa fa-leaf', N'/Log', 3, N'index,inquire,delete,print')
@@ -503,12 +502,12 @@ END
 --==>LogManage存储进程--表开始
 GO
 CREATE TABLE [dbo].[BExampler]([ExamplerID] [int] IDENTITY(1,1) NOT NULL,
-[ExamplerName] [nvarchar](max) NULL CONSTRAINT [DF_BExampler_ExamplerName]  DEFAULT (' '),
+[ExamplerName] [nvarchar](max) NULL CONSTRAINT [DF_BExampler_ExamplerName]  DEFAULT (''),
 [IsDelete] [bit] NULL CONSTRAINT [DF_BExampler_IsDelete]  DEFAULT ((0)),
 [CreateTime] [datetime] NULL CONSTRAINT [DF_BExampler_CreateTime]  DEFAULT (getdate()),
 [CreatorID] [int] NULL CONSTRAINT [DF_BExampler_CreatorID]  DEFAULT ((0)),
 [Version] [int] NULL CONSTRAINT [DF_BExampler_Version]  DEFAULT ((0)),
-[Remark] [nvarchar](max) NULL CONSTRAINT [DF_BExampler_Remark]  DEFAULT (' '),
+[Remark] [nvarchar](max) NULL CONSTRAINT [DF_BExampler_Remark]  DEFAULT (''),
 CONSTRAINT [PK_ZFramework_BExampler] PRIMARY KEY CLUSTERED (ExamplerID ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY]
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'示例名称' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'BExampler', @level2type=N'COLUMN',@level2name=N'ExamplerName'
@@ -592,13 +591,13 @@ END
 --==>BExamplerManage存储进程--表开始
 GO
 CREATE TABLE [dbo].[BTest]([TestID] [int] IDENTITY(1,1) NOT NULL,
-[TestName] [nvarchar](max) NULL CONSTRAINT [DF_BTest_TestName]  DEFAULT (' '),
+[TestName] [nvarchar](max) NULL CONSTRAINT [DF_BTest_TestName]  DEFAULT (''),
 [TestBool] [bit] NULL CONSTRAINT [DF_BTest_TestBool]  DEFAULT ((0)),
 [IsDelete] [bit] NULL CONSTRAINT [DF_BTest_IsDelete]  DEFAULT ((0)),
 [CreateTime] [datetime] NULL CONSTRAINT [DF_BTest_CreateTime]  DEFAULT (getdate()),
 [CreatorID] [int] NULL CONSTRAINT [DF_BTest_CreatorID]  DEFAULT ((0)),
 [Version] [int] NULL CONSTRAINT [DF_BTest_Version]  DEFAULT ((0)),
-[Remark] [nvarchar](max) NULL CONSTRAINT [DF_BTest_Remark]  DEFAULT (' '),
+[Remark] [nvarchar](max) NULL CONSTRAINT [DF_BTest_Remark]  DEFAULT (''),
 CONSTRAINT [PK_ZFramework_BTest] PRIMARY KEY CLUSTERED (TestID ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY]
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'测试名称' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'BTest', @level2type=N'COLUMN',@level2name=N'TestName'
@@ -683,3 +682,4 @@ BEGIN
 	
 END
 --==>BTestManage存储进程
+GO
