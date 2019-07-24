@@ -19,9 +19,10 @@ namespace ZFramework.Common
         /// 实例验证码
         /// </summary>
         /// <param name="length">验证码长度</param>
-        public Tools_ValidateCode(int length = 4)
+        /// <param name="excludeStrs">排除字符</param>
+        public Tools_ValidateCode(int length = 4, params string[] excludeStrs)
         {
-            validateCode = new Tools_RandomCode(true, true).GoRandom(length);
+            validateCode = new Tools_RandomCode(true, true).GoRandom(length, excludeStrs);
         }
 
         /// <summary>

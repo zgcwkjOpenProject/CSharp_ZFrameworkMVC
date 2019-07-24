@@ -33,7 +33,7 @@ namespace ZFramework.Controllers
         /// <returns></returns>
         public ActionResult ValidateImage()
         {
-            Common.Tools_ValidateCode ValidateCode = new Common.Tools_ValidateCode(6);
+            Common.Tools_ValidateCode ValidateCode = new Common.Tools_ValidateCode(6, "0", "1", "o");
             Session["ValidateCode"] = ValidateCode.GetValidate();
             return File(ValidateCode.GetImage(), "image/jpg");
         }

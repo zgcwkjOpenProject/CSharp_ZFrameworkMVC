@@ -15,7 +15,7 @@ namespace ZFramework.Common
         /// <param name="digital">数字</param>
         /// <param name="character">字符</param>
         /// <param name="symbol">符号</param>
-        public Tools_RandomCode(bool digital=false, bool character = false, bool symbol = false)
+        public Tools_RandomCode(bool digital = false, bool character = false, bool symbol = false)
         {
             //数字
             if (digital)
@@ -40,10 +40,15 @@ namespace ZFramework.Common
         /// 获取随机码
         /// </summary>
         /// <param name="Length">长度</param>
+        /// <param name="excludeStrs">排除字符</param>
         /// <returns></returns>
-        public string GoRandom(int Length)
+        public string GoRandom(int Length, params string[] excludeStrs)
         {
+            //准备返回的随机码
             string strRandom = "";
+            //排除对应的字符
+            foreach (var str in excludeStrs) strType = strType.Replace(str + "|", "").Replace(str, "");
+            //获取对应的长度
             string[] zf = strType.Split('|');
             Random rd = new Random();
             for (int i = 0; i < Length; i++)
