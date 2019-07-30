@@ -1,0 +1,163 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    @RenderPage("~/Resource/Shared/Top.cshtml")
+    <title>系统日志</title>
+</head>
+<body style="background:#fff;margin:20px;">
+    <div class="wrap-container clearfix">
+        <div class="column-content-detail">
+            <div class="layui-form">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <input type="text" class="layui-input" id="BeginDate" name="BeginDate" placeholder="起始时间">
+                    </div>
+                    <div class="layui-inline">
+                        <input type="text" class="layui-input" id="EndDate" name="EndDate" placeholder="结束时间">
+                    </div>
+                    <div class="layui-inline">
+                        <input type="text" class="layui-input" id="QueryLikeStr" name="QueryLikeStr" placeholder="关键字">
+                    </div>
+                    <div class="layui-inline">
+                        <button class="layui-btn" onclick="SearchData()">搜索</button>
+                        <button class="layui-btn layui-btn-danger delete layui-hide" onclick="DeleteDate()">删除所有日志</button>
+                        <button class="layui-btn layui-btn-warm print layui-hide" onclick="PrintDate()">打印数据</button>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form" id="TablePrint">
+                <table class="layui-table" lay-filter="TableData" id="TableData"></table>
+            </div>
+        </div>
+    </div>
+    @RenderPage("~/Resource/Shared/Bottom.cshtml")
+    <script>
+        var $, layer, table, laydate, form, upload;
+        layui.use(['jquery', 'layer', 'table', 'laydate', 'form', 'upload'], function () {
+            $ = layui.jquery, layer = layui.layer, table = layui.table, laydate = layui.laydate, form = layui.form, upload = layui.upload;
+            //起始时间
+            var beginDate = laydate.render({
+                elem: '#BeginDate',
+                type: 'datetime',
+                btns: ['confirm'],
+                max: 'nowTime',//默认最大值为当前日期
+                done: function (value, date) {
+                    endDate.config.min = {
+                        year: date.year,
+                        month: date.month - 1,//关键
+                        date: date.date,
+                        hours: date.hours,
+                        minutes: date.minutes,
+                        seconds: date.seconds
+                    }
+                }
+            });
+            //结束时间
+            var endDate = laydate.render({
+                elem: '#EndDate',
+                type: 'datetime',
+                btns: ['confirm'],
+                max: 'nowTime',
+                done: function (value, date) {
+                    beginDate.config.max = {
+                        year: date.year,
+                        month: date.month - 1,//关键
+                        date: date.date,
+                        hours: date.hours,
+                        minutes: date.minutes,
+                        seconds: date.seconds
+                    }
+                }
+            });
+            //表格绑定
+            table.render({
+                elem: '#TableData',
+                url: '/Log/InquireLog',
+                page: true,
+                method: 'post',
+                cellMinWidth: 80,
+                request: {
+                    pageName: 'Page',//页码的参数名称，默认：page
+                    limitName: 'PageSize',//每页数据量的参数名，默认：limit
+                },
+                parseData: function (res) {
+                    return {
+                        "code": res.status,//解析接口状态
+                        "msg": res.message,//解析提示文本
+                        "count": res.total,//解析数据长度
+                        "data": res.rows,//解析数据列表
+                    };
+                },
+                where: {
+                    QueryLikeStr: '',
+                    BeginDate: '',
+                    EndDate: '',
+                },
+                done: function (res, curr, count) {
+                    //console.log(res);//你接口返回的信息
+                    //console.log(curr);//得到当前页码
+                    //console.log(count);//得到数据总量
+                    RoleControl();//加载成功时执行
+                },
+                cols: [[
+                    { type: 'checkbox', fixed: 'left' },
+                    { type: 'numbers', title: '序号', fixed: 'left' },
+                    //{field:'LogID', title: '日志ID', sort: true},
+                    { field: 'UserName', title: '用户名称', sort: true },
+                    { field: 'UserIP', title: '用户IP', sort: true },
+                    { field: 'RequestPath', title: '请求地址', sort: true },
+                    { field: 'Controller', title: '控制器' },
+                    //{ field: 'Controller', title: '控制器', edit: 'text' },
+                    { field: 'CreateTime', title: '创建时间', sort: true },
+                ]]
+            });
+            ////监听单元格编辑
+            //table.on('edit(TableData)', function (obj) {
+            //    var data = obj.data;//所在行的所有相关数据
+            //    var field = obj.field;//当前编辑的字段名
+            //    var value = obj.value;//得到修改后的值
+            //    console.log(data, field, value);
+            //});
+            ////监听行单击事件
+            //table.on('row(TableData)', function (obj) {
+            //    var data = obj.data;//单击行的所有相关数据
+            //    console.log(data);
+            //});
+        });
+        //查询按钮
+        function SearchData() {
+            table.reload('TableData', {
+                where: {
+                    QueryLikeStr: $("#QueryLikeStr").val(),
+                    BeginDate: $("#BeginDate").val(),
+                    EndDate: $("#EndDate").val(),
+                }
+            });
+        }
+        //删除所有日志
+        function DeleteDate() {
+            layer.confirm('确定要删除吗？', {
+                shade: 0.4,
+                resize: false,
+                btn: ['确定', '取消'],
+            }, function () {
+                $.post("/Log/DeleteLogDate", function (data) {
+                    if (data.Status == true) {
+                        layer.msg(data.Message, { icon: 1 });
+                        SearchData();
+                    } else {
+                        layer.msg(data.Message, { icon: 5 });
+                    }
+                });
+            });
+        }
+        //打印按钮
+        function PrintDate() {
+            $("body").html($("#TablePrint").html());
+            window.print();
+            location.reload();
+        }
+    </script>
+</body>
+</html>

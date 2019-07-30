@@ -1,0 +1,277 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>框架帮助</title>
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width">
+    <link href="~/Resource/Content/img/favicon.ico" rel="shortcut icon">
+    <link href="~/Resource/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Resource/Content/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Resource/Content/css/style.min.css" rel="stylesheet" />
+</head>
+<body class="gray-bg">
+    <div class="row dashboard-header">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>相关信息</h5>
+                </div>
+                <div class="ibox-content">
+                    <p>项目快速构建，代码简洁，源码百分百开源并且不依赖任何第三方库</p>
+                    <p>全响应式网站，自动适应市面上所有屏幕</p>
+                    <p>完整的权限控制，根据需求，可以控制到每个按钮的权限状态</p>
+                    <p>完整的代码注释，方便刚上手的人了解</p>
+                    <p>项目内的所有删除数据，采用逻辑删除</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>更新日志</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="panel-group" id="version">
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#version" href="#v201907">2019年07月</a>
+                                </h5>
+                            </div>
+                            <div id="v201907" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <ol>
+                                        <li style="color: #F00;">==>07月01日</li>
+                                        <li>左侧菜单栏通过前台生成，不再依赖后台</li>
+                                        <li>更正子页面名称不正确的问题</li>
+                                        <li>增加部分没压缩的 JS 文件</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#version" href="#v201906">2019年06月</a>
+                                </h5>
+                            </div>
+                            <div id="v201906" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ol>
+                                        <li style="color: #F00;">==>06月17日</li>
+                                        <li>优化生成器的数据库设计的数据类型不区分大小写功能</li>
+                                        <li style="color: #F00;">==>06月14日</li>
+                                        <li>更改输出位置为 GenerateCode</li>
+                                        <li>增加已经登录的，自动跳转至后台</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#version" href="#v201905">2019年05月</a>
+                                </h5>
+                            </div>
+                            <div id="v201905" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ol>
+                                        <li style="color: #F00;">==>05月16日</li>
+                                        <li>修复按钮没有隐藏的问题（更换框架时留下的）</li>
+                                        <li>优化 数据库工具类（Tools_DALMethod） 功能</li>
+                                        <li style="color: #F00;">==>05月15日</li>
+                                        <li>修复打印的内容问题（更换框架时留下的）</li>
+                                        <li>添加一个编辑单元格的示例（Log Index）</li>
+                                        <li>添加一个单击单元格的示例（Log Index）</li>
+                                        <li style="color: #F00;">==>05月09日</li>
+                                        <li>优化日志，记录 404 的页面</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#version" href="#v201904">2019年04月</a>
+                                </h5>
+                            </div>
+                            <div id="v201904" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ol>
+                                        <li style="color: #F00;">==>04月17日</li>
+                                        <li>增加生成器的离线使用功能</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#version" href="#v201903">2019年03月</a>
+                                </h5>
+                            </div>
+                            <div id="v201903" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ol>
+                                        <li style="color: #F00;">==>03月02日</li>
+                                        <li>验证码难度加大</li>
+                                        <li>优化数据操作界面</li>
+                                        <li>优化内部css，js等资源</li>
+                                        <li>优化生成器生成错误的提示</li>
+                                        <li>更正生成的区域错误描述问题</li>
+                                        <li style="color: #F00;">==>03月03日</li>
+                                        <li>修复新增用户时不填密码问题</li>
+                                        <li>更正区域生成的名称不是备注问题</li>
+                                        <li style="color: #F00;">==>03月05日</li>
+                                        <li>更改 Layui 弹出为不可以调整大小问题</li>
+                                        <li>更正部分地方的文本描述</li>
+                                        <li>更正类的名称（Tools_TcpNetwork）=>（Tools_HttpMethod）</li>
+                                        <li style="color: #F00;">==>03月22日</li>
+                                        <li>更正“登陆”为“登录”的文本描述</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#version" href="#v201902">2019年02月</a>
+                                </h5>
+                            </div>
+                            <div id="v201902" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ol>
+                                        <li style="color: #F00;">==>02月26日</li>
+                                        <li>优化部分代码</li>
+                                        <li>增加生成器的数据表类型：系统表默认在表名称前添加S、功能表默认在表名称前添加B、自定义为不添加</li>
+                                        <li style="color: #F00;">==>02月23日</li>
+                                        <li>更正Layui Data的列标签声明过多问题</li>
+                                        <li>修改生成器的版本号为动态</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#version" href="#v201901">2019年01月</a>
+                                </h5>
+                            </div>
+                            <div id="v201901" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ol>
+                                        <li style="color: #F00;">==>01月19日</li>
+                                        <li>更改验证码为不区分大小写</li>
+                                        <li style="color: #F00;">==>01月09日</li>
+                                        <li>增加 转Json 类，可能用途不是很大</li>
+                                        <li>增加 Unicode 类，可能用途不是很大</li>
+                                        <li style="color: #F00;">==>01月02日</li>
+                                        <li>把 Bootstrap Table，更改为 LayuiTable</li>
+                                        <li>优化 DAL 类，可能用途不是很大</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#version" href="#v201812">2018年12月</a>
+                                </h5>
+                            </div>
+                            <div id="v201812" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ol>
+                                        <li style="color: #F00;">==>12月30日</li>
+                                        <li>登录后台的密码加密传输</li>
+                                        <li>登录后台增加有效时间验证</li>
+                                        <li style="color: #F00;">==>12月29日</li>
+                                        <li>把 Layer Laydate 删除，更改为 Layui</li>
+                                        <li>优化手机版的页面显示和操作问题</li>
+                                        <li>避免生成器不报错导致没有生成数据库的问题</li>
+                                        <li>强制输出设计器设计的数据库文档，避免想用却没有了</li>
+                                        <li style="color: #F00;">==>12月26日</li>
+                                        <li>增加日志删除功能</li>
+                                        <li>修复生成的子页面修改功能不能用问题（ID没有被替换导致）</li>
+                                        <li>一些界面的优化（修复 H+ 框架在不同屏幕分辨率的一些小问题）</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h5 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#version" href="#v201811">2018年11月</a>
+                                </h5>
+                            </div>
+                            <div id="v201811" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ol>
+                                        <li style="color: #F00;">==>11月07日</li>
+                                        <li>发布 <a href="http://blog.zgcwkj.top/search/CodeGenerator" target="_blank">CodeGenerator</a> 初版</li>
+                                        <li>初版的功能很多，不想在此描述</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>帮助信息</h5>
+                </div>
+                <div class="ibox-content">
+                    <p>
+                        <i class="fa fa-send-o"></i> Blog：<a href="http://blog.zgcwkj.top" target="_blank">http://blog.zgcwkj.top</a>
+                    </p>
+                    <p>
+                        <i class="fa fa-github"></i> GitHub：<a href="http://github.com/zgcwkj" target="_blank">http://github.com/zgcwkj</a>
+                    </p>
+                    <p>
+                        <i class="fa fa-twitter"></i> Twitter：<a href="http://twitter.com/zgcwkj" target="_blank">http://twitter.com/zgcwkj</a>
+                    </p>
+                    <p>
+                        <i class="fa fa-weibo"></i> 微博：<a href="http://weibo.com/u/3039045163" target="_blank">http://weibo.com/u/3039045163</a>
+                    </p>
+                    <p>
+                        <i class="fa fa-handshake-o"></i> 更多问题请到我的博客留言！
+                    </p>
+                </div>
+            </div>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>视图信息</h5>
+                </div>
+                <div class="ibox-content" style="font-family: cursive;">
+                    <p>●●●●●●●●●●●●···●●●●●●●●●●●●</p>
+                    <p>●●●●●●●●●●●●···●●●●●●●●●●●●</p>
+                    <p>······●●●●●····●●●·········</p>
+                    <p>····●●●●●······●●●●●●●●●●●●</p>
+                    <p>··●●●●●········●●●●●●●●●●●●</p>
+                    <p>●●●●●●●●●●●●···●●●·········</p>
+                    <p>●●●●●●●●●●●●···●●●········· V 2019</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Resource/Content/js/jquery.min.js"></script>
+    <script src="~/Resource/Content/js/bootstrap.min.js"></script>
+    <script src="~/Resource/Content/js/content.min.js"></script>
+</body>
+</html>

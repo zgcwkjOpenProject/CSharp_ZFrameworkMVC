@@ -94,6 +94,7 @@ namespace ZFramework.Models
 
             if (!PointToPointLogin_V(filterContext))
             {
+                filterContext.HttpContext.Session.Clear();
                 Jumpout(filterContext, "/Admin/index?Data=账号被逼退");
                 return;
             }
