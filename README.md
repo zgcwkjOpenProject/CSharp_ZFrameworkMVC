@@ -4,7 +4,7 @@
 
 **本项目属于后台开发类型的管理系统，可以帮助需要快速开发的人员构建项目**
 
-> 后台示例：[http://zframework.zgcwkj.top](http://zframework.zgcwkj.top)（账号密码均为：admin）
+> 后台示例：[http://zframework.zgcwkj.cn](http://zframework.zgcwkj.top)（账号密码均为：admin）
 
 > 源码使用说明：
 
@@ -52,7 +52,7 @@
 
 ---
 
-项目由**代码生成器**生成，详细请查看：[http://blog.zgcwkj.top/search/CodeGenerator](http://blog.zgcwkj.top/search/CodeGenerator)
+项目由**代码生成器**生成，详细请查看：[http://blog.zgcwkj.cn/search/CodeGenerator](http://blog.zgcwkj.cn/search/CodeGenerator)
 
 ---
 
